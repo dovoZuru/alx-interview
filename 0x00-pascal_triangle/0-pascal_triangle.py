@@ -6,7 +6,7 @@ printing pascal's triangle
 
 def pascal_triangle(n):
     """
-    iterate throuhg rows and print items
+    iterate in rows and print items
     """
     if n <= 0:
         return []
