@@ -1,27 +1,27 @@
 #!/usr/bin/python3
-"""
-0. Minimum Operations
-"""
+'''Minimum operations interview test.
+'''
 
 
 def minOperations(n):
-    """
-    minOperations
-    Gets fewest # of operations needed to result in exactly n H characters
-    """
-    # all outputs should be at least 2 char: (min, Copy All => Paste)
-    if (n < 2):
+    '''Find fewest number of operations needed to result
+    in exactly n H characters.
+    '''
+    if not isinstance(n, int):
         return 0
-    ops, root = 0, 2
-    while root <= n:
-        # if n evenly divides by root.
-        if n % root == 0:
-            # total even divisions by root = total operations.
-            ops += root
-            # set n to the remainder of n divided by root.
-            n = n / root
-            # reduce root to find remaining smaller values that evenly divides n.
-            root -= 1
-        # increment root until it evenly divides n
-        root += 1
-    return ops
+    count = 0
+    copied = 0
+    completed = 1
+    while completed < n:
+        if copied == 0:
+            copied = completed
+            completed += copied
+            count += 2
+        elif n - completed > 0 and (n - completed) % completed == 0:
+            copied = completed
+            completed += copied
+            count += 2
+        elif copied > 0:
+            completed += copied
+            count += 1
+    return count
